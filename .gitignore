@@ -3,3 +3,5 @@ venv/
 .Db_Store
 
 .idea/
+
+*/**.pyc
