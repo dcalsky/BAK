@@ -39,32 +39,32 @@ ROBOTSTXT_OBEY = True
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
+# DEFAULT_REQUEST_HEADERS = {
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
 #}
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    'spider.middlewares.SpiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'spider.middlewares.MyCustomDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+# ITEM_PIPELINES = {
 #    'spider.pipelines.SomePipeline': 300,
 #}
 
@@ -91,9 +91,12 @@ ROBOTSTXT_OBEY = True
 
 
 NEWS_CONFIG = (
-  ('sse', 'http://sse.tongji.edu.cn/Data/List/xwdt', 'ul.data-list li'),
-  ('official', 'http://news.tongji.edu.cn/classid-20.html', 'div.news_list li'),
-  ('math', 'http://math.tongji.edu.cn/news.aspx?info_lb=11&flag=11', 'div.xingfa_nr li'),
-  ('mechanical', 'http://mefaculty.tongji.edu.cn/index.php?classid=2753', 'div.news_list li'),
-  ('civil', 'http://civileng.tongji.edu.cn/news_list.asp?sortId=8&sName=%CD%A8%D6%AA%B9%AB%B8%E6', 'table.info_cnt tr'),
+    ('sse', 'http://sse.tongji.edu.cn/Data/List/xwdt', 'ul.data-list li'),
+    ('official', 'http://news.tongji.edu.cn/classid-20.html',
+     'div#content > div.news_list li'),
+    ('math', 'http://math.tongji.edu.cn/news.aspx?info_lb=11&flag=11', 'div.xingfa_nr li'),
+    ('mechanical', 'http://mefaculty.tongji.edu.cn/index.php?classid=2753',
+     'div.news_list li'),
+    ('civil', 'http://civileng.tongji.edu.cn/news_list.asp?sortId=8&sName=%CD%A8%D6%AA%B9%AB%B8%E6',
+     'table.info_cnt tr:nth-child(odd)'),
 )
