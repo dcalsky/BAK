@@ -15,20 +15,17 @@ class NewsSpider(scrapy.Spider):
 
     def start_requests(self):
         for config in NEWS_CONFIG:
-            print('==================config===================')
-            req = scrapy.Request(url=config[URL_COLUMN], callback=self.parse)
-            req.meta['pattern'] = config[PATTERN_COLUMN]
-            req.meta['name'] = config[NAME_COLUMN]
-            yield req
+            yield scrapy.Request(url=config[URL_COLUMN], callback=self.parse, meta={
+                'pattern': config[PATTERN_COLUMN],
+                'name': config[NAME_COLUMN]
+            })
 
     def parse(self, res):
         data_list = res.css(res.meta['pattern'])
-        print('==================parse=============')
-        print(res.meta['name'])
         for post in data_list:
-            item = NewsItem()
-            item['name'] = res.meta['name']
-            item['title'] = post.css('a::text').extract_first().strip()
-            item['href'] = post.css('a::attr(href)').extract_first().strip()
-            item['time'] = post.css('span::text').extract_first().strip()
-            yield item
+            yield NewsItem(
+                name=res.meta['name'],
+                title=post.css('a::text').extract_first().strip(),
+                href=post.css('a::attr(href)').extract_first().strip(),
+                time=post.css('span::text').extract_first().strip()
+            )

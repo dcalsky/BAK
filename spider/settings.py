@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for spider project
-#
-# For simplicity, this file contains only settings considered important or
-# commonly used. You can find more settings consulting the documentation:
-#
-#     http://doc.scrapy.org/en/latest/topics/settings.html
-#     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import os
 
 BOT_NAME = 'spider'
 
@@ -88,6 +81,15 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+SIMAOSAN_USERNAME = os.getenv('$SIMAOSAN_USERNAME')
+SIMAOSAN_PASSWORD = os.getenv('$SIMAOSAN_PASSWORD')
+
+XUANKE_USERNAME = os.getenv('$XUANKE_USERNAME')
+XUANKE_PASSWORD = os.getenv('$XUANKE_PASSWORD')
+
+BAK_EMAIL_USERNAME = os.getenv('$BAK_EMAIL_USERNAME')
+BAK_EMAIL_PASSWORD = os.getenv('$BAK_EMAIL_PASSWORD')
 
 
 NEWS_CONFIG = (
