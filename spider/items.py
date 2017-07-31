@@ -6,3 +6,4 @@ class NewsItem(scrapy.Item):
     title = scrapy.Field()
     href = scrapy.Field()
     time = scrapy.Field()
+    when = scrapy.Field()

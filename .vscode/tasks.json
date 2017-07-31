@@ -1,0 +1,10 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "taskName": "flask",
+      "command": "FLASK_APP=server/main.py venv/bin/python -m flask run",
+      "type": "shell"
+    }
+  ]
+}

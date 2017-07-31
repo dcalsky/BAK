@@ -88,9 +88,6 @@ SIMAOSAN_PASSWORD = os.getenv('$SIMAOSAN_PASSWORD')
 XUANKE_USERNAME = os.getenv('$XUANKE_USERNAME')
 XUANKE_PASSWORD = os.getenv('$XUANKE_PASSWORD')
 
-BAK_EMAIL_USERNAME = os.getenv('$BAK_EMAIL_USERNAME')
-BAK_EMAIL_PASSWORD = os.getenv('$BAK_EMAIL_PASSWORD')
-
 
 NEWS_CONFIG = (
     ('sse', 'http://sse.tongji.edu.cn/Data/List/xwdt', 'ul.data-list li'),

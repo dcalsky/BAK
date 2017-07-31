@@ -3,6 +3,7 @@
 import scrapy
 from spider.items import NewsItem
 from spider.settings import NEWS_CONFIG
+from datetime import datetime
 
 NAME_COLUMN = 0
 URL_COLUMN = 1
@@ -27,5 +28,6 @@ class NewsSpider(scrapy.Spider):
                 name=res.meta['name'],
                 title=post.css('a::text').extract_first().strip(),
                 href=post.css('a::attr(href)').extract_first().strip(),
-                time=post.css('span::text').extract_first().strip()
+                time=post.css('span::text').extract_first().strip(),
+                when=datetime.now().strftime('%Y/%m/%d %H:%M:%S')
             )

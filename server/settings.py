@@ -1,0 +1,4 @@
+import os
+
+BAK_EMAIL_USERNAME = os.getenv('$BAK_EMAIL_USERNAME')
+BAK_EMAIL_PASSWORD = os.getenv('$BAK_EMAIL_PASSWORD')
