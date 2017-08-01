@@ -1,10 +1,22 @@
 {
   "version": "2.0.0",
-  "tasks": [
+  "configurations": [
     {
-      "taskName": "flask",
-      "command": "FLASK_APP=server/main.py venv/bin/python -m flask run",
-      "type": "shell"
+      "name": "Flask (linux/osx)",
+      "type": "python",
+      "request": "launch",
+      "stopOnEntry": false,
+      "pythonPath": "${config.python.pythonPath}",
+      "program": "${env.HOME}/.virtualenvs/flask/bin/flask",
+      "env": {
+        "FLASK_APP": "${workspaceRoot}/quickstart/app.py"
+      },
+      "args": ["run", "--no-debugger", "--no-reload"],
+      "debugOptions": [
+        "WaitOnAbnormalExit",
+        "WaitOnNormalExit",
+        "RedirectOutput"
+      ]
     }
   ]
 }

@@ -7,7 +7,6 @@ BOT_NAME = 'spider'
 SPIDER_MODULES = ['spider.spiders']
 NEWSPIDER_MODULE = 'spider.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'spider (+http://www.yourdomain.com)'
 
@@ -88,14 +87,15 @@ SIMAOSAN_PASSWORD = os.getenv('$SIMAOSAN_PASSWORD')
 XUANKE_USERNAME = os.getenv('$XUANKE_USERNAME')
 XUANKE_PASSWORD = os.getenv('$XUANKE_PASSWORD')
 
-
 NEWS_CONFIG = (
-    ('sse', 'http://sse.tongji.edu.cn/Data/List/xwdt', 'ul.data-list li'),
-    ('official', 'http://news.tongji.edu.cn/classid-20.html',
-     'div#content > div.news_list li'),
-    ('math', 'http://math.tongji.edu.cn/news.aspx?info_lb=11&flag=11', 'div.xingfa_nr li'),
+    ('sse', 'http://sse.tongji.edu.cn/Data/List/xwdt',
+     'ul.data-list li'), ('official',
+                          'http://news.tongji.edu.cn/classid-20.html',
+                          'div#content > div.news_list li'),
+    ('math', 'http://math.tongji.edu.cn/news.aspx?info_lb=11&flag=11',
+     'div.xingfa_nr li'),
     ('mechanical', 'http://mefaculty.tongji.edu.cn/index.php?classid=2753',
      'div.news_list li'),
-    ('civil', 'http://civileng.tongji.edu.cn/news_list.asp?sortId=8&sName=%CD%A8%D6%AA%B9%AB%B8%E6',
-     'table.info_cnt tr:nth-child(odd)'),
-)
+    ('civil',
+     'http://civileng.tongji.edu.cn/news_list.asp?sortId=8&sName=%CD%A8%D6%AA%B9%AB%B8%E6',
+     'table.info_cnt tr:nth-child(odd)'), )
