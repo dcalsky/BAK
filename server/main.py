@@ -1,22 +1,24 @@
 import json
-import smtplib
-import os
 
+from pika import ConnectionParameters, BlockingConnection
 from flask import Flask
 from flask_pymongo import PyMongo
-from settings import BAK_EMAIL_USERNAME, BAK_EMAIL_PASSWORD, DB_NAME
+from .settings import DB_NAME, DB_HOST, DEBUG, MQ_HOST
+
+QUEUE_NAME = 'email_queue'
 
 app = Flask(__name__)
+connection = BlockingConnection(ConnectionParameters(MQ_HOST))
+channel = connection.channel()
+
+channel.queue_declare(queue=QUEUE_NAME, durable=True)
 
 with app.app_context():
     # Python mongodb configuration
     app.config['MONGO_DBNAME'] = DB_NAME
-    app.config['MONGO_HOST'] = 'db'  # Mongo container hostname
+    app.config['MONGO_HOST'] = DB_HOST    # Mongo container hostname
     MONGO = PyMongo(app)
     USER_COLLECTION = MONGO.db.user
-
-MAIL_SERVER = smtplib.SMTP_SSL('smtp.qq.com')
-MAIL_SERVER.login(BAK_EMAIL_USERNAME, BAK_EMAIL_PASSWORD)
 
 
 @app.route('/')
@@ -27,9 +29,7 @@ def index():
 
 @app.route('/subscribe', methods=['post'])
 def subscribe(email, sites):
-    """
-  Receive form post from index page. Including email and sited are subscribed
-  """
+    """Receive form post from index page. Including email and sited are subscribed"""
     user = USER_COLLECTION.find_one({'email': email}, {'_id': 1})
     if user is None:
         # Register an account
@@ -42,29 +42,22 @@ def subscribe(email, sites):
 
 
 @app.route('/fetch', methods=['post'])
-def fetch(items):
-    items = json.loads(items)
-    for item in items:
+def fetch(posts):
+    """Fetch posts from newsSpider"""
+    posts = json.loads(posts)
+    for post in posts:
         # Find all users who subscribed this site
-        users = USER_COLLECTION.find({'sites': {'$in': [item.name]}})
+        users = USER_COLLECTION.find({'sites': {'$in': [post.name]}})
 
         # Send email to user
         for user in users:
-            sendEmail(user.email, item)
-
-    # All email sent, close email server
-    MAIL_SERVER.quit()
+            send_email(user.email, post)
 
 
-def sendEmail(email_address, item):
-    fromaddr = BAK_EMAIL_USERNAME
-    toaddrs = email_address
-    subject = "Test!!!"
-    msg = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n" %
-           (fromaddr, ", ".join(toaddrs), subject))
-
-    MAIL_SERVER.sendmail(fromaddr, toaddrs, msg)
+def send_email(email_address, post):
+    """Send a request to MQ between email server"""
+    channel.basic_publish(exchange='', routing_key=QUEUE_NAME, body=json.dumps(post))
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=DEBUG)
