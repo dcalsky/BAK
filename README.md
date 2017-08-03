@@ -13,5 +13,14 @@ Send email or raise issue to tell me which TJ site's announcement is what you mo
 ## TECH STACK
 - [x] MongoDB (NoSQL database)
 - [x] RabbitMQ (message queue for http server and email server)
-- [x] Docker (deploying multiple container)
+- [x] Docker (deploying multiple containers)
 - [x] Scrapy (network spider framework)
+
+## BUILD
+*MAKE SURE THAT YOU HAVE ALREADY CONFIGURED REALISTIC SETTING VARIABLES AND DOCKER ENVIRONMENT*
+
+Then, just run:
+```
+$ docker-compose up
+```
+
