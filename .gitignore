@@ -72,11 +72,7 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+.vscode/
 *.DS_Store
 .AppleDouble
 .LSOverride
@@ -128,3 +124,4 @@ typings/
 .node_repl_history
 *.tgz
 .yarn-integrity
+d.json

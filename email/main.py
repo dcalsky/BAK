@@ -25,8 +25,7 @@ def sendEmail(email_address, post):
     text = ''
 
     template = Template(
-        open(path.join(path.dirname(__file__), './email-template.html'), 'rt')
-        .read())
+        open(path.join(path.dirname(__file__), './email-template.html'), 'rt').read())
     html = template.render(post=post)
 
     msg = MIMEMultipart('alternative')
