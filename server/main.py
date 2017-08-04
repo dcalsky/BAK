@@ -3,7 +3,7 @@ import json
 from pika import ConnectionParameters, BlockingConnection
 from flask import Flask
 from flask_pymongo import PyMongo
-from .settings import DB_NAME, DB_HOST, DEBUG, MQ_HOST
+from settings import DB_NAME, DB_HOST, DEBUG, MQ_HOST
 
 QUEUE_NAME = 'email_queue'
 
@@ -16,7 +16,7 @@ channel.queue_declare(queue=QUEUE_NAME, durable=True)
 with app.app_context():
     # Python mongodb configuration
     app.config['MONGO_DBNAME'] = DB_NAME
-    app.config['MONGO_HOST'] = DB_HOST    # Mongo container hostname
+    app.config['MONGO_HOST'] = DB_HOST  # Mongo container hostname
     MONGO = PyMongo(app)
     USER_COLLECTION = MONGO.db.user
 
@@ -56,7 +56,8 @@ def fetch(posts):
 
 def send_email(email_address, post):
     """Send a request to MQ between email server"""
-    channel.basic_publish(exchange='', routing_key=QUEUE_NAME, body=json.dumps(post))
+    channel.basic_publish(
+        exchange='', routing_key=QUEUE_NAME, body=json.dumps(post))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,4 @@
+pika
+Flask-PyMongo
+Flask
+python-dotenv

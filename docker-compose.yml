@@ -1,12 +1,24 @@
 version: '3'
 services:
   web:
-    build: .
+    image: python:latest
+    working_dir: /app
     ports:
       - "5000:5000"
     volumes:
-      - ./server:/server
+      - ./server:/app
     links:
       - db
+    command: bash -c "pip install -r requirements.txt && python main.py"
+  email:
+    image: python:latest
+    working_dir: /app
+    volumes:
+      - ./email:/app
+    links:
+      - mq
+    command: bash -c "pip install -r requirements.txt && python main.py"
   db:
     image: mongo:latest
+  mq:
+    image: rabbitmq:latest
