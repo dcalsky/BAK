@@ -1,2 +1,4 @@
 Scrapy
 request
+pymongo
+Scrapyd

@@ -19,13 +19,14 @@ services:
     depends_on:
       - mq
     command: python main.py
-  scrapy:
+  spider:
     build: ./spider
     working_dir: /app
     volumes:
       - ./spider:/app
     depends_on:
       - db
+    command: 'scrapy crawl news'
   db:
     image: mongo:latest
   mq:
