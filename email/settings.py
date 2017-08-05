@@ -8,4 +8,4 @@ BAK_EMAIL_PASSWORD = os.environ.get('BAK_EMAIL_PASSWORD', 'email_sender_password
 
 SMTP_ADDRESS = 'smtp.qq.com'
 
-MQ_HOST = 'localhost'
+MQ_HOST = 'mq'

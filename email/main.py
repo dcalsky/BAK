@@ -17,6 +17,10 @@ channel = connection.channel()
 channel.queue_declare(queue=QUEUE_NAME, durable=True)
 
 
+def queue_callback(ch, method, properties, body):
+    print(body)
+
+
 def sendEmail(email_address, post):
     post = json.loads(post)
     fromaddr = BAK_EMAIL_USERNAME
@@ -40,6 +44,6 @@ def sendEmail(email_address, post):
 
 
 if __name__ == '__main__':
-    channel.basic_consume(sendEmail, queue=QUEUE_NAME)
-    print('Waiting for emails ...')
+    channel.basic_consume(queue_callback, queue=QUEUE_NAME)
+    print('Email Server: waiting for emails ...')
     channel.start_consuming()

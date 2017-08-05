@@ -1,23 +1,31 @@
 version: '3'
 services:
   web:
-    image: python:latest
+    build: ./server
     working_dir: /app
     ports:
-      - "5000:5000"
+      - 5000:5000
     volumes:
       - ./server:/app
-    links:
+    depends_on:
       - db
-    command: bash -c "pip install -r requirements.txt && python main.py"
+      - mq
+    command: python main.py
   email:
-    image: python:latest
+    build: ./email
     working_dir: /app
     volumes:
       - ./email:/app
-    links:
+    depends_on:
       - mq
-    command: bash -c "pip install -r requirements.txt && python main.py"
+    command: python main.py
+  scrapy:
+    build: ./spider
+    working_dir: /app
+    volumes:
+      - ./spider:/app
+    depends_on:
+      - db
   db:
     image: mongo:latest
   mq:

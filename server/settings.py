@@ -5,6 +5,6 @@ load_dotenv(find_dotenv('.env'))
 
 DB_NAME = 'BAK'
 DB_HOST = 'db'
-MQ_HOST = 'localhost'
+MQ_HOST = 'mq'
 
 DEBUG = os.environ.get('DEBUG', 0)

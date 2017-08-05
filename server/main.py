@@ -24,6 +24,8 @@ with app.app_context():
 @app.route('/')
 def index():
     """Return default page"""
+    channel.basic_publish(
+        exchange='', routing_key=QUEUE_NAME, body='123')
     return "Server is running..."
 
 
