@@ -1,0 +1,53 @@
+{
+  "version": 0.1,
+  "sites": [
+    {
+      "name": "sse",
+      "url": "http://sse.tongji.edu.cn/Data/List/xwdt",
+      "post": "ul.data-list li",
+      "title": "",
+      "href": "",
+      "time": ""
+    },
+    {
+      "name": "official",
+      "url": "http://news.tongji.edu.cn/classid-20.html",
+      "post": "div#content > div.news_list li",
+      "title": "",
+      "href": "",
+      "time": ""
+    },
+    {
+      "name": "official",
+      "url": "http://news.tongji.edu.cn/classid-20.html",
+      "post": "div#content > div.news_list li",
+      "title": "",
+      "href": "",
+      "time": ""
+    },
+    {
+      "name": "math",
+      "url": "http://math.tongji.edu.cn/news.aspx?info_lb=11&flag=11",
+      "post": "div.xingfa_nr li",
+      "title": "",
+      "href": "",
+      "time": ""
+    },
+    {
+      "name": "mechanical",
+      "url": "http://mefaculty.tongji.edu.cn/index.php?classid=2753",
+      "post": "div.news_list li",
+      "title": "",
+      "href": "",
+      "time": ""
+    },
+    {
+      "name": "civil",
+      "url": "http://civileng.tongji.edu.cn/news_list.asp?sortId=8&sName=%CD%A8%D6%AA%B9%AB%B8%E6",
+      "post": "table.info_cnt tr:nth-child(odd)",
+      "title": "",
+      "href": "",
+      "time": ""
+    }
+  ]
+}
