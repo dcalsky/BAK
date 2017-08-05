@@ -9,9 +9,9 @@ Send email or raise issue to tell me which TJ site's announcement is what you mo
 - [x] MECHANICAL(机械与能源学院)
 - [x] CIVIL(土木学院)
 - [x] OFFICIAL(同济大学官网)
-- [] 4m3(本研一体化)
-- [] xuanke(选课网)
-- [] foreign(外国语学院)
+- [ ] 4m3(本研一体化)
+- [ ] xuanke(选课网)
+- [ ] foreign(外国语学院)
 
 
 ## TECH STACK
