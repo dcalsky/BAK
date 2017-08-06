@@ -11,6 +11,8 @@ services:
       - db
       - mq
     command: python main.py
+    networks:
+      - net
   email:
     build: ./email
     working_dir: /app
@@ -19,6 +21,8 @@ services:
     depends_on:
       - mq
     command: python main.py
+    networks:
+      - net
   spider:
     build: ./spider
     working_dir: /app
@@ -27,9 +31,17 @@ services:
     depends_on:
       - db
     command: 'scrapy crawl news'
+    networks:
+      - net
   db:
     image: mongo:latest
     ports:
       - 27017:27017
+    networks:
+      - net
   mq:
     image: rabbitmq:latest
+    networks:
+      - net
+networks:
+  net:

@@ -82,7 +82,7 @@ ITEM_PIPELINES = {
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-SERVER_URL = 'http://web:5000'
+SERVER_FETCH_URL = 'http://web:5000/fetch'
 
 SIMAOSAN_USERNAME = os.getenv('$SIMAOSAN_USERNAME')
 SIMAOSAN_PASSWORD = os.getenv('$SIMAOSAN_PASSWORD')

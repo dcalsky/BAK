@@ -7,8 +7,9 @@
 
 import pymongo
 import requests
+import json
 
-from .settings import SERVER_URL
+from .settings import SERVER_FETCH_URL
 
 class MongoPipeline(object):
 
@@ -20,7 +21,10 @@ class MongoPipeline(object):
 
     def insert_post(self, post):
         if not self.is_dup(post):
-            # request.post(SERVER_URL, body=post)
+            requests.post(SERVER_FETCH_URL, data={
+                'post': json.dumps(post)
+            })
+            # requests.get('http://web:5000')
             self.collection.insert_one(post)
 
     def is_dup(self, post):
