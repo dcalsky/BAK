@@ -12,9 +12,7 @@ DEFAULT_TIME_PATTERN = 'span::text'
 class NewsSpider(scrapy.Spider):
     """Spider Definition"""
     name = 'news'
-
-    @classmethod
-    def get_default
+    
     def start_requests(self):
         for site in NEWS_CONFIG['sites']:
             yield scrapy.Request(

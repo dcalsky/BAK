@@ -33,7 +33,7 @@ class MongoPipeline(object):
             mongo_db=crawler.settings.get('MONGO_DATABASE', 'BAK'))
 
     def open_spider(self, spider):
-        self.client = pymongo.MongoClient('localhost')
+        self.client = pymongo.MongoClient('db')
         self.db = self.client[self.mongo_db]
         self.collection = self.db[self.collection_name]
 

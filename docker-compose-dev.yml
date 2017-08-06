@@ -29,5 +29,7 @@ services:
     command: 'scrapy crawl news'
   db:
     image: mongo:latest
+    ports:
+      - 27017:27017
   mq:
     image: rabbitmq:latest

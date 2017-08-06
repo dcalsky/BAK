@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # Web application development env shell script
-docker-compose run --rm --service-ports web
+docker-compose -f docker-compose-dev.yml run --rm --service-ports  web

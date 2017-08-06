@@ -1,4 +1,4 @@
 #!/bin/sh
 
 # Spider application development env shell script
-docker-compose run --rm spider
+docker-compose -f docker-compose-dev.yml run --rm spider

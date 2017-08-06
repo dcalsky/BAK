@@ -90,4 +90,4 @@ SIMAOSAN_PASSWORD = os.getenv('$SIMAOSAN_PASSWORD')
 XUANKE_USERNAME = os.getenv('$XUANKE_USERNAME')
 XUANKE_PASSWORD = os.getenv('$XUANKE_PASSWORD')
 
-NEWS_CONFIG = json.load(open('sites.json', 'rt'))
+NEWS_CONFIG = json.load(open(os.path.join(os.path.dirname(__file__), 'sites.json'), 'rt'))
