@@ -9,10 +9,11 @@ DEFAULT_TITLE_PATTERN = 'a::text'
 DEFAULT_HREF_PATTERN = 'a::attr(href)'
 DEFAULT_TIME_PATTERN = 'span::text'
 
+
 class NewsSpider(scrapy.Spider):
     """Spider Definition"""
     name = 'news'
-    
+
     def start_requests(self):
         for site in NEWS_CONFIG['sites']:
             yield scrapy.Request(

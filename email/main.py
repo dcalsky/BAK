@@ -17,10 +17,10 @@ channel = connection.channel()
 channel.queue_declare(queue=QUEUE_NAME)
 
 
-def sendEmail(email_address, post):
-    fromaddr = BAK_EMAIL_USERNAME
-    toaddrs = email_address
-    subject = '北安跨: 同济大学%s的新闻' % (post['name'], )
+def send_email(email_address, post):
+    from_address = BAK_EMAIL_USERNAME
+    to_address = email_address
+    subject = '北安跨: %s的最新公告' % (post['name'],)
     text = ''
 
     # TODO: Beautify mail template
@@ -30,13 +30,13 @@ def sendEmail(email_address, post):
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = subject
-    msg['From'] = fromaddr
-    msg['To'] = toaddrs
+    msg['From'] = from_address
+    msg['To'] = to_address
     part1 = MIMEText(text, 'plain')
     part2 = MIMEText(html, 'html')
     msg.attach(part1)
     msg.attach(part2)
-    MAIL_SERVER.sendmail(fromaddr, toaddrs, msg.as_string())
+    MAIL_SERVER.sendmail(from_address, to_address, msg.as_string())
 
 
 def queue_callback(ch, method, properties, body):
@@ -44,7 +44,7 @@ def queue_callback(ch, method, properties, body):
         content = json.loads(body.decode('utf-8'))
         email = content['email']
         post = content['post']
-        sendEmail(email, post)
+        send_email(email, post)
     except json.decoder.JSONDecodeError:
         # TODO: add an alarm to avoid message queue heaps up
         print('Decode wrong')

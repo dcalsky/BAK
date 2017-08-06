@@ -18,12 +18,14 @@ with app.app_context():
     MONGO = PyMongo(app)
     USER_COLLECTION = MONGO.db.users
 
+
 @app.route('/')
 def index():
     """Return default page"""
     channel.basic_publish(
         exchange='', routing_key=QUEUE_NAME, body='Test')
     return "Server is running..."
+
 
 @app.route('/subscribe', methods=['POST'])
 def subscribe(email, sites):

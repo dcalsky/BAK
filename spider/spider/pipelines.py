@@ -11,8 +11,8 @@ import json
 
 from .settings import SERVER_FETCH_URL
 
-class MongoPipeline(object):
 
+class MongoPipeline(object):
     collection_name = 'posts'
 
     def __init__(self, mongo_uri, mongo_db):
@@ -24,7 +24,6 @@ class MongoPipeline(object):
             requests.post(SERVER_FETCH_URL, data={
                 'post': json.dumps(post)
             })
-            # requests.get('http://web:5000')
             self.collection.insert_one(post)
 
     def is_dup(self, post):

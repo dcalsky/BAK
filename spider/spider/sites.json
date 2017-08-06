@@ -3,6 +3,7 @@
   "sites": [
     {
       "name": "sse",
+      "cname": "同济大学软件学院",
       "url": "http://sse.tongji.edu.cn/Data/List/xwdt",
       "post": "ul.data-list li",
       "title": "",
