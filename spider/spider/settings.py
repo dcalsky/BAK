@@ -83,11 +83,15 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 SERVER_FETCH_URL = 'http://web:5000/fetch'
+DB_NAME = 'BAK'
+DB_HOST = 'db'
 
-SIMAOSAN_USERNAME = os.getenv('$SIMAOSAN_USERNAME')
-SIMAOSAN_PASSWORD = os.getenv('$SIMAOSAN_PASSWORD')
+GATHER_MODE = os.environ.get('GATHER_MODE', 1)
 
-XUANKE_USERNAME = os.getenv('$XUANKE_USERNAME')
-XUANKE_PASSWORD = os.getenv('$XUANKE_PASSWORD')
+SIMAOSAN_USERNAME = os.environ.get('SIMAOSAN_USERNAME', 'SIMAOSAN_USERNAME')
+SIMAOSAN_PASSWORD = os.environ.get('SIMAOSAN_PASSWORD', 'SIMAOSAN_PASSWORD')
+
+XUANKE_USERNAME = os.environ.get('XUANKE_USERNAME', 'XUANKE_USERNAME')
+XUANKE_PASSWORD = os.environ.get('XUANKE_PASSWORD', '$XUANKE_PASSWORD')
 
 NEWS_CONFIG = json.load(open(os.path.join(os.path.dirname(__file__), 'sites.json'), 'rt'))

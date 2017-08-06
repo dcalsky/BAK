@@ -20,7 +20,7 @@ channel.queue_declare(queue=QUEUE_NAME)
 def send_email(email_address, post):
     from_address = BAK_EMAIL_USERNAME
     to_address = email_address
-    subject = '北安跨: %s的最新公告' % (post['name'],)
+    subject = '北安跨: %s的最新公告' % (post['cname'],)
     text = ''
 
     # TODO: Beautify mail template

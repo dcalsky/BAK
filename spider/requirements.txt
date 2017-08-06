@@ -2,3 +2,4 @@ Scrapy
 requests
 pymongo
 Scrapyd
+python-dotenv

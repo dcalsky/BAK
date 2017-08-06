@@ -28,6 +28,7 @@ class NewsSpider(scrapy.Spider):
         for post in post_list:
             yield NewsItem(
                 name=site['name'],
+                cname=site['cname'],
                 title=post.css(site['title'] or DEFAULT_TITLE_PATTERN).extract_first().strip(),
                 href=post.css(site['href'] or DEFAULT_HREF_PATTERN).extract_first().strip(),
                 time=post.css(site['time'] or DEFAULT_TIME_PATTERN).extract_first().strip(),
