@@ -25,7 +25,8 @@ def send_email(email_address, post):
 
     # TODO: Beautify mail template
     template = Template(
-        open(path.join(path.dirname(__file__), './email-template.html'), 'rt').read())
+        open(path.join(path.dirname(__file__), './email-template.html'), 'rt').read()
+    )
     html = template.render(post=post)
 
     msg = MIMEMultipart('alternative')
