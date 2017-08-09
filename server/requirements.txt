@@ -1,4 +1,4 @@
-pika
-Flask-PyMongo
+pika==0.10
+Flask-PyMongo==0.5.1
 Flask
 python-dotenv

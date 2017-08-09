@@ -1,3 +1,3 @@
 python-dotenv
-pika
+pika==0.10
 Jinja2
