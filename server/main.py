@@ -22,8 +22,7 @@ with app.app_context():
 @app.route('/')
 def index():
     """Return default page"""
-    channel.basic_publish(
-        exchange='', routing_key=QUEUE_NAME, body='Test')
+    channel.basic_publish(exchange='', routing_key=QUEUE_NAME, body='Test')
     return "Server is running..."
 
 
@@ -44,15 +43,13 @@ def subscribe(email, sites):
 @app.route('/fetch', methods=['POST'])
 def fetch():
     """Fetch posts from newsSpider"""
-    print(request.form.get('post'))
     post = json.loads(request.form.get('post', {}))
     # Find all users who subscribed this site
     users = USER_COLLECTION.find({
         'sites': {'$in': [post['name']]}
     })
-    print(users)
 
-    # Send email to user
+    # Send email to users
     for user in users:
         send_email(user['email'], post)
     return json.dumps({'msg': 'ok'}), 200, {'ContentType': 'application/json'}
