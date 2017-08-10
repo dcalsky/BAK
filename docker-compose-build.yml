@@ -3,6 +3,7 @@ services:
   web:
     image: dcalsky/bak_web:latest
     build: ./server
+    working_dir: /app
     ports:
       - 5000:5000
     volumes:
@@ -16,6 +17,7 @@ services:
   email:
     image: dcalsky/bak_email:latest
     build: ./email
+    working_dir: /app
     volumes:
       - ./email:/app
     depends_on:
@@ -26,6 +28,7 @@ services:
   spider:
     image: dcalsky/bak_spider:latest
     build: ./spider
+    working_dir: /app
     volumes:
       - ./spider:/app
     depends_on:
