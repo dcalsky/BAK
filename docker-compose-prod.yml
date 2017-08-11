@@ -3,11 +3,18 @@ services:
   web:
     image: dcalsky/bak_web:latest
     build: ./server
-    working_dir: /app
     ports:
       - 5000:5000
     volumes:
       - ./server:/app
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
     depends_on:
       - db
       - mq
@@ -17,7 +24,6 @@ services:
   email:
     image: dcalsky/bak_email:latest
     build: ./email
-    working_dir: /app
     volumes:
       - ./email:/app
     depends_on:
@@ -28,12 +34,13 @@ services:
   spider:
     image: dcalsky/bak_spider:latest
     build: ./spider
-    working_dir: /app
     volumes:
       - ./spider:/app
     depends_on:
       - db
-    command: 'scrapy crawl news'
+    command: 'python -u main.py'
+    environment:
+      - PRODUCTION=1
     networks:
       - net
   db:
