@@ -1,7 +1,8 @@
 import json
+import re
 
 from pika import ConnectionParameters, BlockingConnection
-from flask import Flask, request
+from flask import Flask, request, render_template, url_for
 from flask_pymongo import PyMongo
 from settings import DB_NAME, DB_HOST, DEBUG, MQ_HOST, QUEUE_NAME
 
@@ -22,13 +23,20 @@ with app.app_context():
 @app.route('/')
 def index():
     """Return default page"""
-    channel.basic_publish(exchange='', routing_key=QUEUE_NAME, body='Test')
-    return "Server is running..."
+    return render_template("index.html")
 
 
 @app.route('/subscribe', methods=['POST'])
-def subscribe(email, sites):
-    """Receive form post from index page. Including email and sited are subscribed"""
+def subscribe():
+    """
+    Receive form post from index page. Including email and sited are subscribed
+    """
+    email = request.form.get('email', None)
+    sites = request.form.getlist('sites', [])
+    email_pattern = r"[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?"
+    if email is None or re.match(email_pattern, email) is None:
+        return json.dumps({'msg': 'unsupported email format'}), 400, {'ContentType': 'application/json'}
+
     user = USER_COLLECTION.find_one({'email': email}, {'_id': 1})
     if user is None:
         # Register an account
@@ -37,7 +45,8 @@ def subscribe(email, sites):
         # Update sites list
         USER_COLLECTION.update_one({
             '_id': user['_id'],
-        }, {'sites': sites})
+        }, {'$set': {'sites': sites}})
+    return json.dumps({'msg': 'ok'}), 200, {'ContentType': 'application/json'}
 
 
 @app.route('/fetch', methods=['POST'])
