@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
       - mq
-    command: python main.py
+    command: python -u main.py
     networks:
       - net
   email:
@@ -20,7 +20,7 @@ services:
       - ./email:/app
     depends_on:
       - mq
-    command: python main.py
+    command: python -u main.py
     networks:
       - net
   spider:
@@ -30,7 +30,7 @@ services:
       - ./spider:/app
     depends_on:
       - db
-    command: 'scrapy crawl news'
+    command: 'python -u main.py'
     networks:
       - net
   db:
