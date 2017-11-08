@@ -1,0 +1,20 @@
+<view class="weui-cells__title">大吉大利</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell">
+        <view class="weui-cell__bd">当前学院</view>
+        <view class="weui-cell__ft">
+          <picker bindchange="bindPickerChange" value="{{siteIndex}}" range="{{siteRange}}" range-key="content">
+            {{siteRange[siteIndex].content}}
+          </picker>
+        </view>
+    </view>
+</view>
+<view class="weui-article">
+  <view class="weui-article__section" wx:for="{{posts}}">
+      <view class="weui-article__h3">{{item.time}}</view>
+      <view class="weui-article__p">
+        {{item.title}} 
+      </view>
+  </view>
+</view>
+

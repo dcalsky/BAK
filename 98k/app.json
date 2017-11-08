@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/subscribe/index",
+    "pages/index/index",
+    "pages/webview/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "同济98k",
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#fafbfc",
+    "navigationBarBackgroundColor": "#fafbfc",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#333",
+    "selectedColor": "#006DF0",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/subscribe/index",
+        "text": "快览",
+        "iconPath": "assets/images/engineDefault.png",
+        "selectedIconPath": "assets/images/engineSelected.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "订阅",
+        "iconPath": "assets/images/pushDefault.png",
+        "selectedIconPath": "assets/images/pushSelected.png"
+      }
+    ]
+  }
+}
