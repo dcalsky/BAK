@@ -1,6 +1,6 @@
 BAK
 -------
-Push up-to-date announcements from multiple school websites.
+Push up-to-date announcements from multiple school websites to you.
 
 ## WEBSITE SUPPORT LIST
 Send email or raise issue to tell me which TJ site's announcement is what you most wanna see... 
@@ -18,13 +18,18 @@ Send email or raise issue to tell me which TJ site's announcement is what you mo
 - MongoDB (NoSQL database)
 - RabbitMQ (message queue for http server and email server)
 - Docker (deploying multiple containers)
-- Scrapy (network spider framework)
+- Scrapy (python network spider framework)
+- Flask (lightweight python web framework)
+- Miniprogram(Tencent)
 
 ## BUILD
 *MAKE SURE THAT YOU HAVE ALREADY CONFIGURED REALISTIC SETTING VARIABLES AND DOCKER ENVIRONMENT*
 
-Then, just run:
+### For server
+Just run:
 ```
 $ docker-compose up
 ```
 
+### For client
+Download [wx miniprogram tool](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html) and open `98k` project. Subsequently, compile and preview it.
