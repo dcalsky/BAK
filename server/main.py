@@ -1,9 +1,11 @@
 import json
 import re
+import dicttoxml
 
 from pika import ConnectionParameters, BlockingConnection
 from flask import Flask, request, render_template, url_for
 from flask_pymongo import PyMongo
+from bson.json_util import dumps
 from settings import DB_NAME, DB_HOST, DEBUG, MQ_HOST, QUEUE_NAME
 
 app = Flask(__name__)
@@ -18,12 +20,40 @@ with app.app_context():
     app.config['MONGO_HOST'] = DB_HOST  # Mongo container hostname
     MONGO = PyMongo(app)
     USER_COLLECTION = MONGO.db.users
+    POST_COLLECTION = MONGO.db.posts
 
 
-@app.route('/')
-def index():
-    """Return default page"""
-    return render_template("index.html")
+@app.route('/sites', methods=['GET'])
+def get_sites():
+    """
+    Get current available sites
+    """
+    sites = POST_COLLECTION.distinct( "cname" )
+    return dumps({
+        'sites': sites
+    }), 200, {'Content-Type': 'application/json'}
+
+
+@app.route('/sites/xml', methods=['GET'])
+def get_sites_xml():
+    """
+    Get current available sites
+    """
+    sites = POST_COLLECTION.distinct( "cname" )
+    xml = dicttoxml.dicttoxml(sites)
+    return xml, 200, {'Content-Type': 'text/xml'}
+
+
+@app.route('/posts', methods=['GET'])
+def get_posts():
+    """
+    Query posts from the single site
+    """
+    site = request.args.get('site')
+    posts = POST_COLLECTION.find({'cname': site})
+    return dumps({
+        'posts': posts
+    }), 200, {'Content-Type': 'application/json'}
 
 
 @app.route('/subscribe', methods=['POST'])
@@ -31,8 +61,9 @@ def subscribe():
     """
     Receive form post from index page. Including email and sited are subscribed
     """
-    email = request.form.get('email', None)
-    sites = request.form.getlist('sites', [])
+    email = request.json.get('email', None)
+    sites = request.json.get('sites', [])
+    print(email, sites)
     email_pattern = r"[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?"
     if email is None or re.match(email_pattern, email) is None:
         return json.dumps({'msg': 'unsupported email format'}), 400, {'ContentType': 'application/json'}
@@ -46,7 +77,7 @@ def subscribe():
         USER_COLLECTION.update_one({
             '_id': user['_id'],
         }, {'$set': {'sites': sites}})
-    return json.dumps({'msg': 'ok'}), 200, {'ContentType': 'application/json'}
+    return json.dumps({'msg': 'ok'}), 200, {'Content-Type': 'application/json'}
 
 
 @app.route('/fetch', methods=['POST'])
@@ -57,11 +88,10 @@ def fetch():
     users = USER_COLLECTION.find({
         'sites': {'$in': [post['name']]}
     })
-
     # Send email to users
     for user in users:
         send_email(user['email'], post)
-    return json.dumps({'msg': 'ok'}), 200, {'ContentType': 'application/json'}
+    return json.dumps({'msg': 'ok'}), 200, {'Content-Type': 'application/json'}
 
 
 def send_email(email_address, post):
