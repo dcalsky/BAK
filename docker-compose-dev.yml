@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: dcalsky/bak_web:latest
+    image: bak_web:latest
     build: ./server
     ports:
       - 5000:5000
@@ -14,7 +14,7 @@ services:
     networks:
       - net
   email:
-    image: dcalsky/bak_email:latest
+    image: bak_email:latest
     build: ./email
     volumes:
       - ./email:/app
@@ -24,7 +24,7 @@ services:
     networks:
       - net
   spider:
-    image: dcalsky/bak_spider:latest
+    image: bak_spider:latest
     build: ./spider
     volumes:
       - ./spider:/app
